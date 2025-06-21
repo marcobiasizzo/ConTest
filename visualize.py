@@ -6,7 +6,8 @@ from matplotlib import patches
 green_mpg = '#006c66'
 grey_mpg = '#eeeeee'
 orange_mpg = '#ef7c00'
-blue_mpg = '#00b1ea'
+dark_blue = '#00b1ea'
+blue_mpg = '#0179A0'
 
 def plot_q_time(quantity, time, name, label=None):
     fig, ax = plt.subplots()
@@ -55,14 +56,39 @@ def generate_video(model, control, name):
     height = 1
     sensorDim = 0.5
 
-    # position of first wheel
     cPosx = 0 + 10 * np.cos(tilt_angle)
     cPosy = 0 + 10 * np.sin(tilt_angle)
     # increase distance
     cPosx = cPosx - (height + sensorDim) * np.sin(tilt_angle)
     cPosy = cPosy + (height + sensorDim) * np.cos(tilt_angle)
-    c = patches.Circle((cPosx, cPosy), Rwheels, color=green_mpg, alpha=0.2)
+    c = patches.Circle((cPosx, cPosy), Rwheels*3, color=green_mpg, alpha=0.4)
     target = ax.add_patch(c)
+    cPosx = 0 + 10 * np.cos(tilt_angle)
+    cPosy = 0 + 10 * np.sin(tilt_angle)
+    # increase distance
+    cPosx = cPosx - (height + sensorDim) * np.sin(tilt_angle)
+    cPosy = cPosy + (height + sensorDim) * np.cos(tilt_angle)
+    c = patches.Circle((cPosx, cPosy), Rwheels*2, color='white')
+    target = ax.add_patch(c)
+    cPosx = 0 + 10 * np.cos(tilt_angle)
+    cPosy = 0 + 10 * np.sin(tilt_angle)
+    # increase distance
+    cPosx = cPosx - (height + sensorDim) * np.sin(tilt_angle)
+    cPosy = cPosy + (height + sensorDim) * np.cos(tilt_angle)
+    c = patches.Circle((cPosx, cPosy), Rwheels, color=green_mpg, alpha=0.4)
+    target = ax.add_patch(c)
+
+    y_pos = 3.5
+    ax.arrow(-3, y_pos, 1, 0, width=0.1, length_includes_head=True, color=dark_blue)
+    ax.text(-1.5, y_pos, 'Feedforward', ha='left', va='center')
+
+    y_pos = 3.0
+    ax.arrow(-3, y_pos, 1, 0, width=0.1, length_includes_head=True, color=blue_mpg)
+    ax.text(-1.5, y_pos, 'Feedback', ha='left', va='center')
+
+    y_pos = 2.5
+    ax.arrow(-3, y_pos, 1, 0, width=0.1, length_includes_head=True, color=orange_mpg)
+    ax.text(-1.5, y_pos, 'Weight', ha='left', va='center')
 
     for i in range(N_frames):
         frame_time = i * 1.0/f_rate
@@ -112,19 +138,21 @@ def generate_video(model, control, name):
         # common factor for forces
         Kmult = 0.8
 
-        # draw friction
-        # center of lower side
-        x_friction = xpos+width/2*np.cos(tilt_angle)
-        y_friction = ypos+width/2*np.sin(tilt_angle)
-        # move lower
-        x_friction = x_friction + 0.2*np.sin(tilt_angle)
-        y_friction = y_friction - 0.2*np.cos(tilt_angle)
-        fric_value = Kmult * vel[idx] * model.c_friction
-        if abs(fric_value) > 0:
-            friction = ax.arrow(x_friction, y_friction, -fric_value*np.cos(tilt_angle), -fric_value*np.sin(tilt_angle), width=0.1,
-                                length_includes_head=False, color=orange_mpg)
+        draw_friction = 0
+        if draw_friction:
+            # draw friction
+            # center of lower side
+            x_friction = xpos+width/2*np.cos(tilt_angle)
+            y_friction = ypos+width/2*np.sin(tilt_angle)
+            # move lower
+            x_friction = x_friction + 0.2*np.sin(tilt_angle)
+            y_friction = y_friction - 0.2*np.cos(tilt_angle)
+            fric_value = Kmult * vel[idx] * model.c_friction
+            if abs(fric_value) > 0:
+                friction = ax.arrow(x_friction, y_friction, -fric_value*np.cos(tilt_angle), -fric_value*np.sin(tilt_angle), width=0.1,
+                                    length_includes_head=False, color=orange_mpg)
 
-            elemSeq = elemSeq + (friction, )
+                elemSeq = elemSeq + (friction, )
 
         # draw Fg
         x_g = xpos + width / 2 * np.cos(tilt_angle)
@@ -150,7 +178,7 @@ def generate_video(model, control, name):
         force_value = Kmult * uff[idx]
         force_ff = ax.arrow(x_force, y_force, force_value * np.cos(tilt_angle), force_value * np.sin(tilt_angle),
                             width=0.1,
-                            length_includes_head=False, color=blue_mpg)
+                            length_includes_head=False, color=dark_blue)
 
         elemSeq = elemSeq + (force_ff, )
 
@@ -172,8 +200,10 @@ def generate_video(model, control, name):
 
 
     ax.set_aspect('equal', adjustable='box')
-    ax.set_xlim(-4, 12)
+    ax.set_xlim(-4, 14)
     ax.set_ylim(-1, 4)
+
+    ax.set_axis_off()
 
     ani = animation.ArtistAnimation(fig=fig, artists=artists, interval=1/f_rate*1000)
     fig.show()
