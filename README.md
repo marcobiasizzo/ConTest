@@ -1,1 +1,1 @@
-![alt text](https://github.com/marcobiasizzo/ConTest/blob/master/Figures/7_wrong_tilt_friction_PID.gif)?raw=true)
+![alt text](https://github.com/marcobiasizzo/ConTest/blob/master/Figures/7_wrong_tilt_friction_PID.gif)
