@@ -14,5 +14,8 @@ BangBang - with 15% tilt
 Proportional - with 15% tilt
 ![alt text](https://github.com/marcobiasizzo/ConTest/blob/master/Figures/4_wrong_tilt_no_friction_P.gif)
 
+The PID controller is necessary in this case to obtain the convergence.
+It also works if the friction is introduced in the simulation.
+
 PID controller - with 15% tilt and friction
 ![alt text](https://github.com/marcobiasizzo/ConTest/blob/master/Figures/7_wrong_tilt_friction_PID.gif)
