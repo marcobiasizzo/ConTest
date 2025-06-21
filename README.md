@@ -1,3 +1,9 @@
+The goal is to move the cart in a position where the antenna is at the center of the target.
+
+A feedforwad control is applied to move the cart.
+In the first example the model applied for the feedforward corresponds to the simulation.
+In the other example a different tilt angle is considered.
+
 The feedforward controller has been tuned considering the 10% of tilt and the absence of friction
 Feedforward condtroller 
 ![alt text](https://github.com/marcobiasizzo/ConTest/blob/master/Figures/1_exact_tilt_no_friction_ff.gif)
