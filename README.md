@@ -5,7 +5,7 @@ In the first example the model applied for the feedforward corresponds to the si
 In the other example a different tilt angle is considered.
 
 The feedforward controller has been tuned considering the 10% of tilt and the absence of friction
-Feedforward condtroller 
+Feedforward controller 
 ![alt text](https://github.com/marcobiasizzo/ConTest/blob/master/Figures/1_exact_tilt_no_friction_ff.gif)
 
 If the real tilt is differenent from the expected one, e.g. 15% tilt, the feedforard controller will fail
