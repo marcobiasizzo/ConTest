@@ -9,9 +9,8 @@ The feedforward controller has been tuned considering the 10% of tilt and the ab
 Feedforward controller 
 ![alt text](https://github.com/marcobiasizzo/ConTest/blob/master/Figures/1_exact_tilt_no_friction_ff.gif)
 
-If the real tilt is differenent from the expected one, e.g. 15% tilt, the feedforard controller will fail
-
-And a simple controller like the BangBang or the Proportional will not work in this case
+If the real tilt is differenent from the expected one, e.g. 15% tilt, the feedforard controller will fail.
+Moreover, a simple controller like the BangBang or the Proportional will not work in this case
 
 Feedforward - with 15% tilt
 ![alt text](https://github.com/marcobiasizzo/ConTest/blob/master/Figures/2_wrong_tilt_no_friction_ff.gif)
