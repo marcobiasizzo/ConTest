@@ -1,4 +1,4 @@
-The goal is to move the cart in a position where the antenna is at the center of the target.
+The goal is to move the cart in the position where the antenna is at the center of the target.
 
 A feedforwad control is applied to move the cart.
 In the first example the model applied for the feedforward corresponds to the simulation.
