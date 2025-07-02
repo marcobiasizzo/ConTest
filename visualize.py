@@ -17,6 +17,30 @@ def plot_q_time(quantity, time, name, label=None):
     fig.show()
     fig.savefig('Figures/' + name + '.png')
 
+def plot_force(model, control, name, label=None):
+
+    tilt_angle = np.asin(model.tilt_perc / 100)
+    g_value = model.mass * 9.81 * np.sin(tilt_angle)
+    uff = control.luff
+    ufb = control.lufb
+    utime = control.ltimeu
+
+    fig, ax = plt.subplots(figsize=(5, 3))
+    linew = 4
+    ax.plot(utime, uff, color=blue_mpg,linewidth=linew, label='Feedback')
+    ax.plot(utime, ufb, color=dark_blue,linewidth=linew, label='Feedforward')
+    ax.hlines(g_value,xmin=min(utime),xmax=max(utime),colors=orange_mpg,linewidth=linew,linestyles='--',label='Weight')
+    ax.legend()
+    ax.set_xlabel('time (s)')
+    ax.set_ylabel('Force (N)')
+
+    ax.set_yticks([])
+    ax.set_xticks([])
+    secax = ax.secondary_xaxis(0, transform=ax.transData)
+    # secax.set_xticks([])
+
+    fig.show()
+    fig.savefig('Figures/' + name + '.svg')
 
 def generate_video(model, control, name):
     pos = model.lpos
