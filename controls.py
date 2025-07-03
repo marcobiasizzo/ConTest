@@ -95,7 +95,7 @@ class Controls(object):
         return u
 
     def PID(self, pos, t):
-        kD = 1.5
+        kD = 10
         Mult = 100
         kP = 2*Mult*self.c_coeff/self.mass * kD
         kI = (Mult*self.c_coeff/self.mass)**2 * kD
@@ -108,11 +108,6 @@ class Controls(object):
             self.lerrInt = np.append(self.lerrInt, errInt)
 
             u = err * kP + errDer * kD + errInt * kI
-            sat_lim = 10
-            if u > sat_lim:
-                u = sat_lim
-            if u < - sat_lim:
-                u = - sat_lim
 
             self.lerr = np.append(self.lerr, err)
 
@@ -139,6 +134,14 @@ class Controls(object):
             ufb = 0
 
         u = uff + ufb
+
+        sat_lim = 10
+        if u > sat_lim:
+            u = sat_lim
+            ufb = u - uff
+        if u < - sat_lim:
+            u = - sat_lim
+            ufb = u - uff
 
         self.luff = np.append(self.luff, uff)
         self.lufb = np.append(self.lufb, ufb)

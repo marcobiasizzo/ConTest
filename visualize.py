@@ -6,8 +6,9 @@ from matplotlib import patches
 green_mpg = '#006c66'
 grey_mpg = '#eeeeee'
 orange_mpg = '#ef7c00'
-dark_blue = '#00b1ea'
+violetto = '#00b1ea'
 blue_mpg = '#0179A0'
+violetto = '#EE82EE'
 
 def plot_q_time(quantity, time, name, label=None):
     fig, ax = plt.subplots()
@@ -27,17 +28,19 @@ def plot_force(model, control, name, label=None):
 
     fig, ax = plt.subplots(figsize=(5, 3))
     linew = 4
-    ax.plot(utime, uff, color=blue_mpg,linewidth=linew, label='Feedback')
-    ax.plot(utime, ufb, color=dark_blue,linewidth=linew, label='Feedforward')
+    ax.plot(utime, uff, color=blue_mpg,linewidth=linew, label='Feedforward')
+    if not(name[0] == '1' or name[0] == '2'):
+        ax.plot(utime, ufb, color=violetto,linewidth=linew, label='Feedback')
     ax.hlines(g_value,xmin=min(utime),xmax=max(utime),colors=orange_mpg,linewidth=linew,linestyles='--',label='Weight')
     ax.legend()
     ax.set_xlabel('time (s)')
     ax.set_ylabel('Force (N)')
 
-    ax.set_yticks([])
-    ax.set_xticks([])
-    secax = ax.secondary_xaxis(0, transform=ax.transData)
+    # ax.set_yticks([])
+    # ax.set_xticks([])
+    # secax = ax.secondary_xaxis(0, transform=ax.transData)
     # secax.set_xticks([])
+    ax.set_axis_off()
 
     fig.show()
     fig.savefig('Figures/' + name + '.svg')
@@ -103,7 +106,7 @@ def generate_video(model, control, name):
     target = ax.add_patch(c)
 
     y_pos = 3.5
-    ax.arrow(-3, y_pos, 1, 0, width=0.1, length_includes_head=True, color=dark_blue)
+    ax.arrow(-3, y_pos, 1, 0, width=0.1, length_includes_head=True, color=violetto)
     ax.text(-1.5, y_pos, 'Feedforward', ha='left', va='center')
 
     y_pos = 3.0
@@ -202,7 +205,7 @@ def generate_video(model, control, name):
         force_value = Kmult * uff[idx]
         force_ff = ax.arrow(x_force, y_force, force_value * np.cos(tilt_angle), force_value * np.sin(tilt_angle),
                             width=0.1,
-                            length_includes_head=False, color=dark_blue)
+                            length_includes_head=False, color=violetto)
 
         elemSeq = elemSeq + (force_ff, )
 

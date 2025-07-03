@@ -39,13 +39,13 @@ elif cSimName in ['2_wrong_tilt_no_friction_ff', '3_wrong_tilt_no_friction_bb', 
         t_end = 5
     if cSimName == '3_wrong_tilt_no_friction_bb':
         feedback = 'bang_bang'
-        t_end = 20
+        t_end = 10
     elif cSimName == '4_wrong_tilt_no_friction_P':
         feedback = 'P'
         t_end = 10
     elif cSimName == '5_wrong_tilt_no_friction_PI':
         feedback = 'PI'
-        t_end = 20
+        t_end = 10
 elif cSimName in ['6_wrong_tilt_friction_PI', '7_wrong_tilt_friction_PID']:
     tilt_real = tilt_model * 1.5
     c_coeff = 0.01
@@ -53,7 +53,7 @@ elif cSimName in ['6_wrong_tilt_friction_PI', '7_wrong_tilt_friction_PID']:
         feedback = 'PI'
     elif cSimName == '7_wrong_tilt_friction_PID':
         feedback = 'PID'
-    t_end = 20
+    t_end = 10
 
 if __name__ == '__main__':
     Car = car.Car(mass, c_coeff, tilt_real)
