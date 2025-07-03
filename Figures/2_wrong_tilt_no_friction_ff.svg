@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2025-07-03T22:03:52.196931</dc:date>
+    <dc:date>2025-07-03T22:35:58.847657</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -31,21 +31,21 @@ z
   <g id="axes_1">
    <g id="line2d_1">
     <path d="M 57.681818 119.759558 
-L 57.834 33.48 
-L 88.067455 33.48 
-L 88.219636 109.08 
-L 179.427273 109.08 
-L 179.579455 184.68 
-L 209.863636 184.68 
-L 210.015818 109.08 
+L 57.808624 33.48 
+L 72.873117 33.48 
+L 72.999923 109.08 
+L 118.548459 109.08 
+L 118.675264 184.68 
+L 133.765119 184.68 
+L 133.891924 109.08 
 L 311.318182 109.08 
 L 311.318182 109.08 
-" clip-path="url(#p5403263858)" style="fill: none; stroke: #0179a0; stroke-width: 4; stroke-linecap: square"/>
+" clip-path="url(#pa787439b7a)" style="fill: none; stroke: #00b1ea; stroke-width: 4; stroke-linecap: square"/>
    </g>
    <g id="LineCollection_1">
     <path d="M 57.681818 103.740221 
 L 311.318182 103.740221 
-" clip-path="url(#p5403263858)" style="fill: none; stroke-dasharray: 14.8,6.4; stroke-dashoffset: 0; stroke: #ef7c00; stroke-width: 4"/>
+" clip-path="url(#pa787439b7a)" style="fill: none; stroke-dasharray: 14.8,6.4; stroke-dashoffset: 0; stroke: #ef7c00; stroke-width: 4"/>
    </g>
    <g id="legend_1">
     <g id="patch_2">
@@ -65,7 +65,7 @@ z
      <path d="M 224.803125 39.018437 
 L 234.803125 39.018437 
 L 244.803125 39.018437 
-" style="fill: none; stroke: #0179a0; stroke-width: 4; stroke-linecap: square"/>
+" style="fill: none; stroke: #00b1ea; stroke-width: 4; stroke-linecap: square"/>
     </g>
     <g id="text_1">
      <!-- Feedforward -->
@@ -382,7 +382,7 @@ z
   </g>
  </g>
  <defs>
-  <clipPath id="p5403263858">
+  <clipPath id="pa787439b7a">
    <rect x="45" y="25.92" width="279" height="166.32"/>
   </clipPath>
  </defs>

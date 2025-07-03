@@ -23,7 +23,7 @@ cSimNameList = [
     '7_wrong_tilt_friction_PID',
 ]
 
-nSim = 7
+nSim = 2
 cSimName = cSimNameList[nSim-1]
 
 if cSimName == '1_exact_tilt_no_friction_ff':
@@ -36,7 +36,7 @@ elif cSimName in ['2_wrong_tilt_no_friction_ff', '3_wrong_tilt_no_friction_bb', 
     c_coeff = 0.0
     if cSimName == '2_wrong_tilt_no_friction_ff':
         feedback = ''
-        t_end = 5
+        t_end = 10
     if cSimName == '3_wrong_tilt_no_friction_bb':
         feedback = 'bang_bang'
         t_end = 10
@@ -74,4 +74,4 @@ if __name__ == '__main__':
     #
     # visualize.plot_q_time(Control.lu, Control.ltimeu, cSimName, 'Control (N)')
     #
-    # visualize.generate_video(Car, Control, cSimName)
+    visualize.generate_video(Car, Control, cSimName)

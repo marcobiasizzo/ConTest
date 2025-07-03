@@ -6,8 +6,8 @@ from matplotlib import patches
 green_mpg = '#006c66'
 grey_mpg = '#eeeeee'
 orange_mpg = '#ef7c00'
-violetto = '#00b1ea'
-blue_mpg = '#0179A0'
+dark_blue = '#0179A0'
+blue_mpg = '#00b1ea'
 violetto = '#EE82EE'
 
 def plot_q_time(quantity, time, name, label=None):
@@ -55,9 +55,9 @@ def generate_video(model, control, name):
     ufb = control.lufb
     utime = control.ltimeu
 
-    fig, ax = plt.subplots(figsize=(12, 4))
+    fig, ax = plt.subplots(figsize=(12, 4), dpi=300)
 
-    f_rate = 30.0
+    f_rate = 8.0
     N_frames = int(t_end * f_rate)
     artists = []
 
@@ -81,41 +81,47 @@ def generate_video(model, control, name):
     # target point
     width = 2
     height = 1
-    sensorDim = 0.5
+    sensorDim = 1
 
     cPosx = 0 + 10 * np.cos(tilt_angle)
     cPosy = 0 + 10 * np.sin(tilt_angle)
     # increase distance
     cPosx = cPosx - (height + sensorDim) * np.sin(tilt_angle)
     cPosy = cPosy + (height + sensorDim) * np.cos(tilt_angle)
-    c = patches.Circle((cPosx, cPosy), Rwheels*3, color=green_mpg, alpha=0.4)
+    c = patches.Circle((cPosx, cPosy), Rwheels*5, color=green_mpg, alpha=0.4, edgecolor=None)
     target = ax.add_patch(c)
     cPosx = 0 + 10 * np.cos(tilt_angle)
     cPosy = 0 + 10 * np.sin(tilt_angle)
     # increase distance
     cPosx = cPosx - (height + sensorDim) * np.sin(tilt_angle)
     cPosy = cPosy + (height + sensorDim) * np.cos(tilt_angle)
-    c = patches.Circle((cPosx, cPosy), Rwheels*2, color='white')
+    c = patches.Circle((cPosx, cPosy), Rwheels*3, color='white')
     target = ax.add_patch(c)
     cPosx = 0 + 10 * np.cos(tilt_angle)
     cPosy = 0 + 10 * np.sin(tilt_angle)
     # increase distance
     cPosx = cPosx - (height + sensorDim) * np.sin(tilt_angle)
     cPosy = cPosy + (height + sensorDim) * np.cos(tilt_angle)
-    c = patches.Circle((cPosx, cPosy), Rwheels, color=green_mpg, alpha=0.4)
+    c = patches.Circle((cPosx, cPosy), Rwheels, color=green_mpg, alpha=0.4, edgecolor=None)
     target = ax.add_patch(c)
 
     y_pos = 3.5
-    ax.arrow(-3, y_pos, 1, 0, width=0.1, length_includes_head=True, color=violetto)
+    ax.arrow(-3, y_pos, 1, 0, width=0.1, length_includes_head=True, color=blue_mpg)
     ax.text(-1.5, y_pos, 'Feedforward', ha='left', va='center')
 
     y_pos = 3.0
-    ax.arrow(-3, y_pos, 1, 0, width=0.1, length_includes_head=True, color=blue_mpg)
+    ax.arrow(-3, y_pos, 1, 0, width=0.1, length_includes_head=True, color=violetto)
     ax.text(-1.5, y_pos, 'Feedback', ha='left', va='center')
 
     y_pos = 2.5
     ax.arrow(-3, y_pos, 1, 0, width=0.1, length_includes_head=True, color=orange_mpg)
     ax.text(-1.5, y_pos, 'Weight', ha='left', va='center')
+
+    ax.text(-3, -0.9, f'{model.tilt_perc} %')
+
+    ax.plot([0, 10*np.cos(tilt_angle)], [-0.5+0, -0.5+10*np.sin(tilt_angle)], color='k')
+    ax.text(10*np.cos(tilt_angle)/2, -0.8+10*np.sin(tilt_angle)/2, f'{10} m', rotation=tilt_deg,
+            ha='center', va='center')
 
     for i in range(N_frames):
         frame_time = i * 1.0/f_rate
@@ -158,9 +164,13 @@ def generate_video(model, control, name):
         # draw sensor
         x_sensor = xpos + width * np.cos(tilt_angle) - height * np.sin(tilt_angle)
         y_sensor = ypos + width * np.sin(tilt_angle) + height * np.cos(tilt_angle)
-        sensor = ax.arrow(x_sensor, y_sensor, -0.5*np.sin(tilt_angle), 0.5*np.cos(tilt_angle),
-                            width=0.1, length_includes_head=True, color=green_mpg, head_width=0)
+        sensor = ax.arrow(x_sensor, y_sensor, -sensorDim*np.sin(tilt_angle), sensorDim*np.cos(tilt_angle),
+                            width=0.02, length_includes_head=True, color=green_mpg, head_width=0)
         elemSeq = elemSeq + (sensor,)
+        sensorEnd = patches.Circle((x_sensor-sensorDim*np.sin(tilt_angle), y_sensor+sensorDim*np.cos(tilt_angle)), Rwheels, color=green_mpg)
+        circ3 = ax.add_patch(sensorEnd)
+
+        elemSeq = elemSeq + (circ3,)
 
         # common factor for forces
         Kmult = 0.8
@@ -205,7 +215,7 @@ def generate_video(model, control, name):
         force_value = Kmult * uff[idx]
         force_ff = ax.arrow(x_force, y_force, force_value * np.cos(tilt_angle), force_value * np.sin(tilt_angle),
                             width=0.1,
-                            length_includes_head=False, color=violetto)
+                            length_includes_head=False, color=blue_mpg)
 
         elemSeq = elemSeq + (force_ff, )
 
@@ -220,7 +230,7 @@ def generate_video(model, control, name):
         if abs(force_value) > 0:
             force_fb = ax.arrow(x_force, y_force, force_value * np.cos(tilt_angle), force_value * np.sin(tilt_angle),
                                 width=0.1,
-                                length_includes_head=False, color=blue_mpg)
+                                length_includes_head=False, color=violetto)
             elemSeq = elemSeq + (force_fb, )
 
         artists.append(elemSeq)

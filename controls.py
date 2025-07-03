@@ -135,7 +135,7 @@ class Controls(object):
 
         u = uff + ufb
 
-        sat_lim = 10
+        sat_lim = 8.1
         if u > sat_lim:
             u = sat_lim
             ufb = u - uff
