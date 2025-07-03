@@ -55,7 +55,7 @@ def generate_video(model, control, name):
     ufb = control.lufb
     utime = control.ltimeu
 
-    fig, ax = plt.subplots(figsize=(12, 4), dpi=300)
+    fig, ax = plt.subplots(figsize=(12, 4), dpi=150)
 
     f_rate = 8.0
     N_frames = int(t_end * f_rate)
@@ -213,11 +213,13 @@ def generate_video(model, control, name):
         x_force = x_force - height * 0.66 * np.sin(tilt_angle)
         y_force = y_force + height * 0.66 * np.cos(tilt_angle)
         force_value = Kmult * uff[idx]
-        force_ff = ax.arrow(x_force, y_force, force_value * np.cos(tilt_angle), force_value * np.sin(tilt_angle),
-                            width=0.1,
-                            length_includes_head=False, color=blue_mpg)
+        if abs(force_value) > 0:
+            force_ff = ax.arrow(x_force, y_force, force_value * np.cos(tilt_angle), force_value * np.sin(tilt_angle),
+                                width=0.1,
+                                length_includes_head=False, color=blue_mpg)
 
-        elemSeq = elemSeq + (force_ff, )
+            elemSeq = elemSeq + (force_ff,)
+
 
         # draw feedback
         # move to right side

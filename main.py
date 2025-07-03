@@ -23,7 +23,7 @@ cSimNameList = [
     '7_wrong_tilt_friction_PID',
 ]
 
-nSim = 3
+nSim = 7
 cSimName = cSimNameList[nSim-1]
 
 if cSimName == '1_exact_tilt_no_friction_ff':
